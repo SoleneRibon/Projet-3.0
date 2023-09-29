@@ -1,0 +1,151 @@
+html {
+    background-color: #fffef8;
+    padding: 0;
+    margin: 0;
+
+}
+
+
+
+
+ ul {
+	list-style: none; 
+
+}
+body {
+	max-width: 1140px;
+	margin:auto;
+	font-family: 'Work Sans' ;
+	font-size: 14px;
+    
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	margin: 50px 0
+}
+section {
+	margin: 50px 0
+}
+h1{
+	display: flex;
+	flex-direction: column;
+	font-family: 'Syne';
+	font-size: 22px;
+	font-weight: 800;
+	color: #B1663C
+}
+h1 > span {
+	font-family: 'Work Sans';
+	font-size:10px;
+	letter-spacing: 0.1em;
+;
+}
+nav ul {
+	display: flex;
+	align-items: center;
+	list-style-type: none;
+
+}
+nav li {
+	padding: 0 10px;
+	font-size: 1.2em;
+}
+li:hover {
+	color: #B1663C;
+}
+
+h2 {
+    font-family: 'Syne';
+	font-size: 22px;
+	font-weight: 400;
+	color: #1D6154
+
+}
+
+
+
+.log-in {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    
+}
+
+.log-in-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    
+}
+form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    margin: 0;
+    padding: 0;
+    width: 30%;
+    
+}
+
+label {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+input {
+    margin-bottom: 20px;
+    border: 1px solid white;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    height: 40px;
+    width: 100%;
+}
+input:focus {
+    outline: none;
+}
+
+.connect {
+    background-color: #1D6154;
+    color: white;
+    border-radius: 20px;
+    border: 1px transparent solid;;
+    padding: 10px;
+    margin-bottom: 5px;
+    font-family: 'Work Sans' ;
+    font-size: 14px;
+    width: 50%;
+    margin: auto;
+    
+}
+.connect:hover {
+    cursor: pointer;
+}
+
+a {
+    color: black;
+    margin-top: 15px;
+}
+
+
+
+footer nav ul {
+	display: flex;
+	justify-content: flex-end;
+	margin: 2em;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 0;
+    margin-right: 0px;
+
+    
+    
+}
