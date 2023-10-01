@@ -1,46 +1,52 @@
-const apiUrl = "http://localhost:5678/api/works";
+
 const filters = document.querySelector(".filters");
 const modaleBack = document.getElementById('modale');
-const divModale = document.querySelector('modaleBox');
+const divModale = document.querySelector('.modaleBox');
+const figureModale = document.querySelector('.figure-img')
 const crossModale = document.querySelector('.cross-modale');
 const topBar = document.querySelector('.top-info');
 const editBtn = document.querySelector('.edit-btn');
 
 
+
 //***************** Si pas connecté ********************/
 
-
-/* MENTOR+NOUS
 const apiUrl = "http://localhost:5678/api/"
 const allWorks = new Set()
-const allWorksID = new Set()
 const allCats = new Set()
 const gallery = document.querySelector("#gallery")
+const filtersDiv = document.querySelector("#filters")
+
 
 async function init() {
 	const worksPromise = getDatabaseData("works")
 	const catsPromise = getDatabaseData("categories")
+	const works = await Promise.all([worksPromise])
+	const cats = await Promise.all([catsPromise])
 
-	const [works, cats] = await Promise.all([worksPromise, catsPromise]);
-
-	for (const work of works) {
+	for (const work of works[0]) {
 		allWorks.add(work)
 	}
 
-	for (const workID of works) {
-		allWorksID.add(workID.categoryId)
+	for (const cat of cats[0]) {
+		allCats.add(cat)
 	}
 
-
-	for (const cat of cats) {
-		allCats.add(cat.name)
-	}
 	displayWorks()
 	displayFilter()
 }
-init()*/
+init()
 
-/* FILTRE MENTOR 
+async function getDatabaseData(type) {
+    try {
+        const responseData = await fetch(apiUrl + type);
+        const allData = await responseData.json();
+        return allData;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 function displayWorks(filter = "0") {
 	gallery.innerHTML = ""
 	let selectedWorks = allWorks
@@ -51,105 +57,68 @@ function displayWorks(filter = "0") {
 	for (const work of selectedWorks) {
 		const figure = document.createElement("figure");
 		figure.setAttribute('categoryId', work.categoryId)
-		figure.innerHTML = <img src="${work.imageUrl}" alt="${work.title}"/>
-							<figcaption>${work.title}</figcaption>
+		figure.innerHTML = `<img src="${work.imageUrl}" alt="${work.title}"/>
+							<figcaption>${work.title}</figcaption>`
 		fragment.appendChild(figure)
 	}
 	gallery.appendChild(fragment)
-
-}*/
-
-// Initialisation de l'API
-export const initApi = async () => {
-	try {
-		const responseWorks = await fetch(apiUrl);
-		const allWorks = await responseWorks.json();
-		return allWorks;
-	} catch (error) {
-		console.error(error);
-	}
-};
-
-initApi();
-generateFilters();
-displayWorks();
-
-// Fonction qui génére les différents filtres ainsi que leurs fonctionnalitées
-async function generateFilters() {
-	filters.innerHTML = "";
-	const alltheWorks = await initApi();
-	const Works = new Set();
-	const categories = new Set();
-	const categoriesId = new Set();
-	categories.add("Tous");
-
-	// Récupération des catégories dans l'API stocké dans allCategories
-	for (let i = 0; i < alltheWorks.length; i++) {
-		Works.add(alltheWorks);
-		categories.add(alltheWorks[i].category.name);
-		categoriesId.add(alltheWorks[i].category.id);
-
-	}
-
-	const allCategories = Array.from(categories);
-
-	// Affichage des boutons en dynamique
-	for (let i = 0; i < allCategories.length; i++) {
-		const filterButton = document.createElement("button");
-		filterButton.innerText = allCategories[i];
-		filterButton.classList.add('filters-button');
-
-		// Création des id des boutons
-		let categoryId = 0;
-		if (allCategories[i] === "Objets") {
-			categoryId = 1;
-		} else if (allCategories[i] === "Appartements") {
-			categoryId = 2;
-		} else if (allCategories[i] === "Hotels & restaurants") {
-			categoryId = 3;
-		}
-		filterButton.dataset.id = categoryId;
-		filters.appendChild(filterButton);
-	}
-
-	//Active la class 'Active' sur le bouton tous par défaut
-	const allButtons = document.querySelectorAll('.filters-button');
-	if (allButtons.length > 0) {
-		const defaultButton = allButtons[0];
-		defaultButton.classList.add('active');
-	}
-	// Retire la class 'Active' au précedent bouton
-	allButtons.forEach(button => {
-		button.addEventListener('click', (event) => {
-			document.querySelector('.active').classList.remove("active");
-			event.target.classList.add("active")
-			displayWorks(event.target.dataset.id)
-		});
-	});
 }
 
-// Affichage des projets
-async function displayWorks(categoryId = 0) {
-	// En attente de l'initialisation
-	const allWorks = await initApi();
+function displayWorksIntoModal() {
+	figureModale.innerHTML = ''
 	const fragment = document.createDocumentFragment()
-	const gallery = document.getElementById('gallery');
-
-	gallery.innerHTML = "";
-
-	allWorks.forEach(project => {
-		if (project.categoryId === categoryId || categoryId == 0) {
-			const figure = document.createElement('figure');
-			figure.innerHTML =
-				`
-			<img src="${project.imageUrl}" alt="${project.title}"/>				
-			<figcaption>${project.title}</figcaption>
-			`;
-			fragment.appendChild(figure);
-		}
-	});
-	gallery.appendChild(fragment);
+	for (const work of allWorks) {
+		const figure = document.createElement("figure");
+		figure.innerHTML = `<img src="${work.imageUrl}" alt="${work.title}"/>`
+		fragment.appendChild(figure)
+	}
+	figureModale.appendChild(fragment)
 }
+
+function addFiltersHandler() {
+	const filtersButton = document.querySelectorAll('.filters-button');
+	for (const button of filtersButton) {
+		button.addEventListener('click', function (event) {
+			displayFilter(event.target.dataset.id)
+			displayWorks(event.target.dataset.id)
+		})
+	}
+}
+
+function displayFilter(filter = '0') {
+	//création bouton TOUS
+	filtersDiv.innerHTML = ''
+	const fragment = document.createDocumentFragment()
+	const button = document.createElement('button');
+	button.dataset.id = 0;
+	button.innerText = 'Tous';
+	button.classList.add("filters-button");
+	if (filter === '0') {
+		button.classList.add('active')
+	}
+	fragment.appendChild(button)
+	
+	// Les autres boutons
+	for (const cat of allCats) {
+		const catButton = document.createElement('button');
+		catButton.dataset.id = cat.id;
+		catButton.innerText = cat.name;
+		catButton.classList.add("filters-button");
+		if (filter == cat.id.toString()) {
+			catButton.classList.add('active')
+		}
+		fragment.appendChild(catButton)
+
+	}
+	
+	filtersDiv.appendChild(fragment)
+	addFiltersHandler()
+
+
+
+}
+
+
 
 //*****************Si connecté ********************/
 
@@ -193,33 +162,12 @@ if (isLogged) {
 **********************************
 **********************************/
 
-//récupération des projets dans la modale. 
-async function displayWorks2(categoryId = 0){
-	const allWorks = await initApi();
-	const fragment = document.createDocumentFragment();
-	const figureModale = document.querySelector(".figure-img");
 
-	figureModale.innerHTML = "",
-
-	allWorks.forEach(project => {
-		if (project.categoryId === categoryId || categoryId == 0) {
-			const figure = document.createElement('figure');
-			figure.innerHTML =
-				`
-			<img src="${project.imageUrl}" alt="${project.title}"/>				
-			`;
-			
-			fragment.appendChild(figure);
-		}
-	}); 
-	figureModale.appendChild(fragment);
-
-}
 //montrer la modale
 function displayModale() {
 	modaleBack.style.display = null
 	crossModale.addEventListener('click', closeModal);
-	displayWorks2();
+	displayWorksIntoModal();
 }
 //fermer la modale
 function closeModal() {

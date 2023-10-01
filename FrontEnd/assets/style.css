@@ -154,7 +154,7 @@ li a:hover {
 	border-radius: 20px;
 	padding: 10px 20px 10px 20px;
 }
-.active {
+.filters-button.active {
 	color: white;
 	background-color: #1D6154;
 }
