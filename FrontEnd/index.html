@@ -13,7 +13,7 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script type="module" src="./script/index.js" defer></script>
-	
+
 
 
 </head>
@@ -31,7 +31,7 @@
 			<ul>
 				<li>projets</li>
 				<li>contact</li>
-				<li><a href="http://127.0.0.1:5500/login.html">login</a></li>
+				<li><a href="/login.html">login</a></li>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
@@ -52,17 +52,44 @@
 					décorateur(trice)</p>
 			</article>
 		</section>
-			<aside id="modale" class="modale" aria-hidden="true" style="display: none;">
-				<div class="modaleBox">
-					
-					<i class="cross-modale fa-solid fa-xmark"></i>
-					<h1 class="modaletitle">Galerie photo</h1>
-					<div class="figure-img"></div>
-					<hr class="modale-hr">
-					<button class="addImg">Ajouter une photo</button>
-					
+		<aside id="modale" class="modale" aria-hidden="true" style="display: none;">
+			<div class="modaleBox">
+				<i class="cross-modale fa-solid fa-xmark"></i>
+				<h1 class="modaletitle">Galerie photo</h1>
+				<div class="figure-img"></div>
+				<hr class="modale-hr">
+				<button class="addImg">Ajouter une photo</button>
+			</div>
+
+			<div class="addImgModale">
+				<div class="headImgModal">
+					<i class="arrow-modale fa-solid fa-arrow-left"></i>
+					<i class="cross-modaleImg fa-solid fa-xmark"></i>
 				</div>
-			</aside>
+				<form id="addWorkForm" action="" method="post" class="bodyImgModal">
+					<h1 class="modaletitle">Ajout Photo</h1>
+					<div class="addImgContainer">
+						<i class="fa-regular fa-image"></i>
+						<input type="file" id="image" name="image" accept="image/jpeg, image/png">
+						<button class="addImgBtn">+ Ajouter photo</button>
+						<img src="#" id="previewImage" />
+						<legend>jpg, png: 4mo max</legend>
+					</div>
+
+					<label for="name">Titre</label>
+					<input type="text" name="title" id="name" required>
+					<label for="category">Catégorie</label>
+					<select name="category" id="category">
+						
+					</select>
+					<hr>
+					
+				</form>
+				<button class="btnSubmit" type="submit">Valider</button>
+
+			</div>
+		</aside>
+
 
 
 
@@ -72,7 +99,8 @@
 			<div class="edit-section">
 
 				<h2>Mes Projets</h2>
-				<button class="edit-btn" style="display: none;"><i class="fa-regular fa-pen-to-square ico-info-2"></i>Modifier</button>
+				<button class="edit-btn" style="display: none;"><i
+						class="fa-regular fa-pen-to-square ico-info-2"></i>Modifier</button>
 
 			</div>
 			<div class="filters" id="filters"></div>
@@ -104,5 +132,3 @@
 </body>
 
 </html>
-			
-
