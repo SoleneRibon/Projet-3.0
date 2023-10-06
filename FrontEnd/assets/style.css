@@ -447,6 +447,7 @@ footer nav ul {
 }
 
 .figure-img {
+	z-index: 1;
 	overflow: auto;
 	display: grid;
 	justify-content: center;
@@ -454,7 +455,8 @@ footer nav ul {
 	grid-template-columns: repeat(5, 80px);
 	gap: 10px;
 	width: 100%;
-	margin-bottom: 100px;
+	margin-bottom: 130px;
+	max-height: 500px;
 }
 
 .figure-img img {
@@ -468,23 +470,37 @@ footer nav ul {
 	position: relative;
 
 }
-
+.bottom-modale{
+	z-index: 2;
+	position: fixed;
+	bottom: 100px;
+	display: flex;
+	flex-direction: column;
+	max-height: 130px;
+	width: 700px;
+	justify-content: center;
+	align-items:center ;
+	background-color: white;
+}
 .modale-hr {
 	width: 80%;
 	height: 1px;
 	background-color: rgb(179, 179, 179);
 	border: none;
 	border-top: 50px;
+	margin-top: 20px;
 }
 
 .addImg {
+	
 	margin-top: 30px;
+	margin-bottom: 40px;
 	border: none;
 	background-color: #1D6154;
 	color: white;
 	border-radius: 20px;
 	height: 40px;
-	width: 40%;
+	width: 50%;
 	font-family: 'Work Sans';
 	cursor: pointer;
 }
@@ -589,10 +605,12 @@ footer nav ul {
 .bodyImgModal #image {
 	display: none;
 }
-
-.bodyImgModal label{
-	text-align: left;
-	margin-top: 30px;
+.addImgInfo{
+	height: 250px;
+}
+.addImgInfo label{
+	
+	margin-top: 100px;
 	margin-right: 90%;
 	font-size: 15px;
 	font-weight: 600;

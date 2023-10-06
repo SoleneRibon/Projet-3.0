@@ -57,8 +57,10 @@
 				<i class="cross-modale fa-solid fa-xmark"></i>
 				<h1 class="modaletitle">Galerie photo</h1>
 				<div class="figure-img"></div>
-				<hr class="modale-hr">
-				<button class="addImg">Ajouter une photo</button>
+				<div class="bottom-modale">
+					<hr class="modale-hr">
+					<button class="addImg">Ajouter une photo</button>
+				</div>
 			</div>
 
 			<div class="addImgModale">
@@ -75,15 +77,17 @@
 						<img src="#" id="previewImage" />
 						<legend>jpg, png: 4mo max</legend>
 					</div>
-
-					<label for="name">Titre</label>
-					<input type="text" name="title" id="name" required>
-					<label for="category">Catégorie</label>
-					<select name="category" id="category">
-						
-					</select>
+					<div class="addImgInfo">
+						<label for="name">Titre</label>
+						<input type="text" name="title" id="name" required>
+						<label for="category">Catégorie</label>
+						<select name="category" id="category">
+					
+						</select>
+					</div>
 					<hr>
 					
+				
 				</form>
 				<button class="btnSubmit" type="submit">Valider</button>
 
