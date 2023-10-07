@@ -1,9 +1,6 @@
-
-
-
 async function checkLogin() {
 
-    // récupérer input + value
+    // récupéreration des valeurs des inputs, 
     const eMail = document.getElementById('email').value;
     const passWord = document.getElementById('password').value;
 
@@ -16,7 +13,7 @@ async function checkLogin() {
 
     const loginJSON = JSON.stringify(loginData);
     
-    // recupère l'API
+    // Envoie data à l'API via method: POST
     const response = await fetch('http://localhost:5678/api/users/login', {
         method: 'POST',
         headers: {
@@ -45,7 +42,7 @@ async function checkLogin() {
 
     }
 };
-
+//récupération du bouton et ajout de l'EventListener pour se connecter
 const connectBtn = document.querySelector("#formlogin");
 connectBtn.addEventListener("submit", function (event) {
     event.preventDefault();
