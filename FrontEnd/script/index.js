@@ -4,8 +4,7 @@ const modaleBack = document.getElementById('modale');
 const divModale = document.querySelector('.modaleBox');
 const figureModale = document.querySelector('.figure-img')
 const crossModale = document.querySelector('.cross-modale');
-const crossModaleImg = document.querySelector('.cross-modaleImg')
-const topBar = document.querySelector('.top-info');
+const crossModaleImg = document.querySelector('.cross-modaleImg');
 const editBtn = document.querySelector('.edit-btn');
 const btnAddImg = document.querySelector('.addImg');
 const AddImgPage = document.querySelector('.addImgModale')
@@ -114,7 +113,7 @@ function displayFilter(filter = '0') {
 }
 
 //*****************Si connecté ********************/
-
+const topBar = document.querySelector('.top-info')
 //Récupération du Token
 const userToken = sessionStorage.getItem("token");
 const isLogged = userToken != null;
@@ -143,8 +142,10 @@ if (isLogged) {
 	//apparition de la barre mode edit + Bouton modale
 	topBar.style.display = null;
 	editBtn.style.display = null;
-
-
+}
+else {
+	topBar.style.display = "none";
+	editBtn.style.display = "none"
 }
 /**************************************
  **************************************
@@ -191,7 +192,7 @@ function closeModal() {
 	formAddWork.reset()
 	document.querySelector('#previewImage').src = "#"
 	document.querySelector('.addImgContainer').classList.remove('hide')
-	document.querySelector('.btnSubmit').style.backgroundColor = '#a7a7a7';
+	document.querySelector('.btnSubmit').classList.remove('btnColor')
 }
 
 modaleBack.addEventListener('click', function (event) {
@@ -327,7 +328,7 @@ async function sendAddWork() {
 		formAddWork.reset()
 		document.querySelector('#previewImage').src = "#"
 		document.querySelector('.addImgContainer').classList.remove('hide');
-		document.querySelector('.btnSubmit').style.backgroundColor = '#a7a7a7';
+		
 		alert("Le formulaire a été envoyé avec succès.")
 		closeModal()
 	} else if (response.status === 401) {
@@ -366,7 +367,8 @@ inputFile.onchange = (event) => {
         fileReader.onload = function (fileEventReader) {
 			document.querySelector('#previewImage').src = fileEventReader.target.result;
 			document.querySelector('.addImgContainer').classList.add('hide')
-			document.querySelector('.btnSubmit').style.backgroundColor = '#1d6154';
+			document.querySelector('.btnSubmit').classList.add('btnColor')
+			
     	};
         fileReader.readAsDataURL(selectedFile);
 	} else {

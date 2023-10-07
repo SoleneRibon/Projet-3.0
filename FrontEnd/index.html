@@ -12,14 +12,14 @@
 		rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script type="module" src="./script/index.js" defer></script>
+	<script src="./script/index.js" defer></script>
 
 
 
 </head>
 
 <body>
-	<div class="top-info" style="display: none;">
+	<div class="top-info">
 		<a href="#">
 			<p>Mode édition</p>
 			<i class="ico-info fa-regular fa-pen-to-square "></i>
@@ -52,7 +52,7 @@
 					décorateur(trice)</p>
 			</article>
 		</section>
-		<aside id="modale" class="modale" aria-hidden="true" style="display: none;">
+		<aside id="modale" class="modale" aria-hidden="true">
 			<div class="modaleBox">
 				<i class="cross-modale fa-solid fa-xmark"></i>
 				<h1 class="modaletitle">Galerie photo</h1>
@@ -68,13 +68,13 @@
 					<i class="arrow-modale fa-solid fa-arrow-left"></i>
 					<i class="cross-modaleImg fa-solid fa-xmark"></i>
 				</div>
-				<form id="addWorkForm" action="" method="post" class="bodyImgModal">
+				<form id="addWorkForm" action="#" method="post" class="bodyImgModal">
 					<h1 class="modaletitle">Ajout Photo</h1>
 					<div class="addImgContainer">
 						<i class="fa-regular fa-image"></i>
 						<input type="file" id="image" name="image" accept="image/jpeg, image/png">
 						<button class="addImgBtn">+ Ajouter photo</button>
-						<img src="#" id="previewImage" />
+						<img src="#" id="previewImage" alt=""/>
 						<legend>jpg, png: 4mo max</legend>
 					</div>
 					<div class="addImgInfo">
@@ -103,7 +103,7 @@
 			<div class="edit-section">
 
 				<h2>Mes Projets</h2>
-				<button class="edit-btn" style="display: none;"><i
+				<button class="edit-btn"><i
 						class="fa-regular fa-pen-to-square ico-info-2"></i>Modifier</button>
 
 			</div>
