@@ -421,6 +421,10 @@ footer nav ul {
 	height: 750px;
 }
 
+.modaleDisable {
+	display: none !important;
+}
+
 .addImgModale {
 	display: none;
 	flex-direction: column;

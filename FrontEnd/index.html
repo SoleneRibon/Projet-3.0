@@ -26,12 +26,12 @@
 		</a>
 	</div>
 	<header>
-		<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
 			<ul>
-				<li>projets</li>
+				<li><a href="./index.html">projets</a></li>
 				<li>contact</li>
-				<li><a href="/login.html">login</a></li>
+				<li><a href="./login.html">login</a></li>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
@@ -52,7 +52,7 @@
 					décorateur(trice)</p>
 			</article>
 		</section>
-		<aside id="modale" class="modale" aria-hidden="true">
+		<aside id="modale" class="modaleDisable" aria-hidden="true">
 			<div class="modaleBox">
 				<i class="cross-modale fa-solid fa-xmark"></i>
 				<h1 class="modaletitle">Galerie photo</h1>
@@ -74,20 +74,20 @@
 						<i class="fa-regular fa-image"></i>
 						<input type="file" id="image" name="image" accept="image/jpeg, image/png">
 						<button class="addImgBtn">+ Ajouter photo</button>
-						<img src="#" id="previewImage" alt=""/>
-						<legend>jpg, png: 4mo max</legend>
+						<img src="#" id="previewImage" alt="" />
+						<p>jpg, png: 4mo max</p>
 					</div>
 					<div class="addImgInfo">
 						<label for="name">Titre</label>
 						<input type="text" name="title" id="name" required>
 						<label for="category">Catégorie</label>
 						<select name="category" id="category">
-					
+
 						</select>
 					</div>
 					<hr>
-					
-				
+
+
 				</form>
 				<button class="btnSubmit" type="submit">Valider</button>
 
@@ -103,8 +103,7 @@
 			<div class="edit-section">
 
 				<h2>Mes Projets</h2>
-				<button class="edit-btn"><i
-						class="fa-regular fa-pen-to-square ico-info-2"></i>Modifier</button>
+				<button class="edit-btn"><i class="fa-regular fa-pen-to-square ico-info-2"></i>Modifier</button>
 
 			</div>
 			<div class="filters" id="filters"></div>
@@ -116,7 +115,7 @@
 			<p>Vous avez un projet ? Discutons-en !</p>
 			<form action="#" method="post">
 				<label for="name">Nom</label>
-				<input type="text" name="name" id="name">
+				<input type="text" name="nameContact" id="nameContact">
 				<label for="email">Email</label>
 				<input type="email" name="email" id="email">
 				<label for="message">Message</label>

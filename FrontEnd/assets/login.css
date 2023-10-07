@@ -129,6 +129,7 @@ input:focus {
 a {
     color: black;
     margin-top: 15px;
+    text-decoration: none;
 }
 
 

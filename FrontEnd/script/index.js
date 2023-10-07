@@ -1,17 +1,4 @@
 
-const filters = document.querySelector(".filters");
-const modaleBack = document.getElementById('modale');
-const divModale = document.querySelector('.modaleBox');
-const figureModale = document.querySelector('.figure-img')
-const crossModale = document.querySelector('.cross-modale');
-const crossModaleImg = document.querySelector('.cross-modaleImg');
-const editBtn = document.querySelector('.edit-btn');
-const btnAddImg = document.querySelector('.addImg');
-const AddImgPage = document.querySelector('.addImgModale')
-const arrowModal = document.querySelector('.arrow-modale');
-
-
-
 //***************** Si pas connecté ********************/
 
 const apiUrl = "http://localhost:5678/api/"
@@ -113,7 +100,10 @@ function displayFilter(filter = '0') {
 }
 
 //*****************Si connecté ********************/
-const topBar = document.querySelector('.top-info')
+
+const editBtn = document.querySelector('.edit-btn');
+const topBar = document.querySelector('.top-info');
+
 //Récupération du Token
 const userToken = sessionStorage.getItem("token");
 const isLogged = userToken != null;
@@ -145,8 +135,10 @@ if (isLogged) {
 }
 else {
 	topBar.style.display = "none";
-	editBtn.style.display = "none"
+	editBtn.style.display = "none";
 }
+
+
 /**************************************
  **************************************
  **************************************
@@ -155,7 +147,17 @@ else {
 ***************************************
 ***************************************
 **************************************/
-//fonction pour la modale
+
+const modaleBack = document.getElementById('modale');
+const divModale = document.querySelector('.modaleBox');
+const figureModale = document.querySelector('.figure-img');
+const crossModale = document.querySelector('.cross-modale');
+const crossModaleImg = document.querySelector('.cross-modaleImg');
+const btnAddImg = document.querySelector('.addImg');
+const AddImgPage = document.querySelector('.addImgModale');
+const arrowModal = document.querySelector('.arrow-modale');
+
+//fonction pour montrer les projets dans la modale
 function displayWorksIntoModal() {
 
 	figureModale.innerHTML = ''
@@ -178,8 +180,11 @@ function displayWorksIntoModal() {
 }
 //montrer la modale
 function displayModale() {
-	modaleBack.style.display = null
-	divModale.style.display = null
+	modaleBack.style.display = null;
+	divModale.style.display = null;
+	modaleBack.classList.remove('modaleDisable');
+	modaleBack.classList.add('modale')
+
 	crossModale.addEventListener('click', closeModal);
 	displayWorksIntoModal();
 }
@@ -292,7 +297,7 @@ btnAddImg.addEventListener('click', () => {
 
 	initCategoryField()
 })
-
+//Initialisation des catégories du formulaire dans la seconde modale (select)
 function initCategoryField() {
 	const fragment = document.createDocumentFragment()
 	for (const cat of allCats) {
@@ -305,10 +310,10 @@ function initCategoryField() {
 	categoryField.innerHTML = ''
 	categoryField.appendChild(fragment)
 }
-
+//Requête (post) d'envoie des nouveaux projets
 async function sendAddWork() {
 	let formData = new FormData(formAddWork)
-	
+
 	const response = await fetch(apiUrl + "works", {
 		method: 'POST',
 		headers: {
@@ -318,9 +323,9 @@ async function sendAddWork() {
 	});
 
 	console.log(response)
-
+	//Si la réponse est correcte, on affiche le nouveau projet dans les galeries et on vide le formulaire de la modale
 	if (response.ok) {
-		
+
 		const work = response.json()
 		allWorks.add(await work)
 		displayWorks()
@@ -328,19 +333,19 @@ async function sendAddWork() {
 		formAddWork.reset()
 		document.querySelector('#previewImage').src = "#"
 		document.querySelector('.addImgContainer').classList.remove('hide');
-		
+
 		alert("Le formulaire a été envoyé avec succès.")
 		closeModal()
 	} else if (response.status === 401) {
 		alert("Impossible de soumettre le formulaire car vous n'êtes pas authentifié.")
 	} else if (response.status === 400) {
 		alert("Le formulaire soumis est invalide")
-	 } else if (response.status === 500) {
+	} else if (response.status === 500) {
 		alert("Une erreur est survenue côté API")
 	}
 }
 
-const formAddWork = document.querySelector('#addWorkForm')
+//ajout du EventListener sur le bouton (type submit) du formulaire
 const btnAddWork = document.querySelector('.btnSubmit')
 
 btnAddWork.addEventListener('click', function () {
@@ -351,6 +356,9 @@ btnAddWork.addEventListener('click', function () {
 		alert('Une donnée du formulaire est vide.');
 	}
 })
+//récupération et vérificaion du contenu du formulaire
+const formAddWork = document.querySelector('#addWorkForm')
+const inputFile = document.querySelector('#image')
 
 function addWorkFormIsValid() {
 	let titleValue = formAddWork.querySelector('input[name="title"]').value;
@@ -358,19 +366,19 @@ function addWorkFormIsValid() {
 	return titleValue !== null && titleValue !== undefined && titleValue.trim() !== '' && imageValueIsNotNull;
 }
 
-const inputFile = document.querySelector('#image')
+//ciblage de la zone de séléction de l'image, vérification du contenu et changements effectués sur la modale 
 inputFile.onchange = (event) => {
 	let target = event.target
 	let selectedFile = target.files && target.files[0] ? target.files[0] : undefined;
 	if (selectedFile != undefined) {
 		var fileReader = new FileReader();
-        fileReader.onload = function (fileEventReader) {
+		fileReader.onload = function (fileEventReader) {
 			document.querySelector('#previewImage').src = fileEventReader.target.result;
 			document.querySelector('.addImgContainer').classList.add('hide')
 			document.querySelector('.btnSubmit').classList.add('btnColor')
-			
-    	};
-        fileReader.readAsDataURL(selectedFile);
+
+		};
+		fileReader.readAsDataURL(selectedFile);
 	} else {
 		document.querySelector('.addImgContainer').classList.remove('hide')
 	}
@@ -381,6 +389,7 @@ const fakeBtnImg = document.querySelector('.addImgBtn');
 const importBtn = document.querySelector('#image');
 
 fakeBtnImg.addEventListener('click', (event) => {
+	//Reset de l'action sur l'importation pour éviter la redirection par défaut via preventDefault
 	event.preventDefault();
 	importBtn.click();
 });
