@@ -38,7 +38,7 @@ async function checkLogin() {
         const userLogged = JSON.stringify(result);
 
         sessionStorage.setItem("loggedUser", userLogged);
-        window.location.replace("/index.html");
+        window.location.replace("./index.html");
 
     }
 };
