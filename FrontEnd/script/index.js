@@ -27,7 +27,7 @@ async function init() {
 	closeModal()
 }
 init()
-
+//fetch de l'API
 async function getDatabaseData(type) {
 	try {
 		const responseData = await fetch(apiUrl + type);
