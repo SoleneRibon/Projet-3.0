@@ -55,7 +55,7 @@ function displayWorks(filter = "0") {
 	gallery.appendChild(fragment)
 }
 
-//activations des filtres avec les boutons
+//activations des filtres avec les boutons.
 function addFiltersHandler() {
 	const filtersButton = document.querySelectorAll('.filters-button');
 	for (const button of filtersButton) {
