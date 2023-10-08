@@ -37,7 +37,7 @@ async function getDatabaseData(type) {
 		console.error(error);
 	}
 };
-//génération des works
+//génération des works.
 function displayWorks(filter = "0") {
 	gallery.innerHTML = ""
 	let selectedWorks = allWorks
