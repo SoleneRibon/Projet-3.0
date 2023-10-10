@@ -385,10 +385,10 @@ inputFile.onchange = (event) => {
 }
 
 // Bouton Import Image
-const fakeBtnImg = document.querySelector('.addImgBtn');
+const addBtnImg = document.querySelector('.addImgBtn');
 const importBtn = document.querySelector('#image');
 
-fakeBtnImg.addEventListener('click', (event) => {
+addBtnImg.addEventListener('click', (event) => {
 	//Reset de l'action sur l'importation pour éviter la redirection par défaut via preventDefault
 	event.preventDefault();
 	importBtn.click();
