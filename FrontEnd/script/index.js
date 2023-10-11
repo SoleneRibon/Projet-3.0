@@ -27,6 +27,7 @@ async function init() {
 	closeModal()
 }
 init()
+
 //fetch de l'API.
 async function getDatabaseData(type) {
 	try {
@@ -37,6 +38,7 @@ async function getDatabaseData(type) {
 		console.error(error);
 	}
 };
+
 //génération des works.
 function displayWorks(filter = "0") {
 	gallery.innerHTML = ""
@@ -66,6 +68,7 @@ function addFiltersHandler() {
 	}
 }
 
+//création des boutons pour filtrer
 function displayFilter(filter = '0') {
 	//création bouton TOUS
 	filtersDiv.innerHTML = ''
@@ -78,7 +81,6 @@ function displayFilter(filter = '0') {
 		button.classList.add('active')
 	}
 	fragment.appendChild(button)
-
 	// Les autres boutons
 	for (const cat of allCats) {
 		const catButton = document.createElement('button');
@@ -89,15 +91,12 @@ function displayFilter(filter = '0') {
 			catButton.classList.add('active')
 		}
 		fragment.appendChild(catButton)
-
 	}
-
 	filtersDiv.appendChild(fragment)
 	addFiltersHandler()
-
-
-
 }
+	
+
 
 //*****************Si connecté ********************/
 
@@ -109,7 +108,6 @@ const userToken = sessionStorage.getItem("token");
 const isLogged = userToken != null;
 
 if (isLogged) {
-
 	// Modification de "login" par "logout"
 	const navbar = document.querySelector("nav");
 	const logIn = navbar.querySelector("li:nth-child(3)");
@@ -123,7 +121,7 @@ if (isLogged) {
 		//Clear de la session
 		sessionStorage.clear();
 		// Redirection sur la page login.html
-		window.location.replace("/index.html")
+		window.location.replace("./index.html")
 	});
 	//Récupération des filtres
 	const filters = document.querySelector(".filters");
@@ -136,7 +134,8 @@ if (isLogged) {
 else {
 	topBar.style.display = "none";
 	editBtn.style.display = "none";
-}
+}	
+
 
 
 /**************************************
@@ -159,7 +158,6 @@ const arrowModal = document.querySelector('.arrow-modale');
 
 //fonction pour montrer les projets dans la modale
 function displayWorksIntoModal() {
-
 	figureModale.innerHTML = ''
 	const fragment = document.createDocumentFragment()
 	for (const work of allWorks) {
@@ -172,12 +170,11 @@ function displayWorksIntoModal() {
 		</div>`
 
 		fragment.appendChild(figure)
-
 	}
 	figureModale.appendChild(fragment)
-
 	deleteWork();
 }
+
 //montrer la modale
 function displayModale() {
 	modaleBack.style.display = null;
@@ -188,6 +185,7 @@ function displayModale() {
 	crossModale.addEventListener('click', closeModal);
 	displayWorksIntoModal();
 }
+
 //fermer la modale
 function closeModal() {
 	divModale.style.display = "none";
@@ -199,22 +197,20 @@ function closeModal() {
 	document.querySelector('.addImgContainer').classList.remove('hide')
 	document.querySelector('.btnSubmit').classList.remove('btnColor')
 }
-
 modaleBack.addEventListener('click', function (event) {
 	if (event.target === modaleBack) {
 		closeModal();
 	}
 });
 
-// Récupération du bouton et ajout du listener pour montrer la modale
 
+// Récupération du bouton et ajout du listener pour montrer la modale
 editBtn.addEventListener('click', () => {
 	displayModale();
-
 });
 
-// Function pour récupérer le projet en fonction de son ID
 
+// Function pour récupérer le projet en fonction de son ID
 function findWorkById(id) {
 	for (const work of allWorks) {
 		if (work.id === id) {
@@ -223,8 +219,8 @@ function findWorkById(id) {
 	}
 }
 
-// Suppression des travaux
 
+// Suppression des travaux
 async function deleteProject(worksId) {
 	const apiUrlWorks = "http://localhost:5678/api/works";
 	const deleteUrl = `${apiUrlWorks}/${worksId}`;
@@ -237,7 +233,6 @@ async function deleteProject(worksId) {
 				Authorization: `Bearer ${userToken}`,
 			}
 		});
-
 		if (!response.ok) {
 			throw new Error('Une erreur a eu lieu pendant la suppression du projet');
 		} else {
@@ -245,8 +240,6 @@ async function deleteProject(worksId) {
 			if (workstoRemove) {
 				workstoRemove.remove();
 				alert('Suppression du projet avec succès');
-
-
 				// Actualisation de la gallerie des projets
 				const workToRemove = findWorkById(parseInt(worksId));
 
@@ -254,13 +247,13 @@ async function deleteProject(worksId) {
 					allWorks.delete(workToRemove);
 					displayWorks();
 				}
-
 			} else {
 				console.log('Élément introuvable')
 			}
 		}
 	}
 }
+		
 
 // Supression du Work sélectionné
 function deleteWork() {
@@ -270,13 +263,11 @@ function deleteWork() {
 			button.addEventListener("click", () => {
 				const worksId = button.closest('.figureWorksModal').dataset.id;
 				deleteProject(worksId);
-
-
 			})
 		}
 	}
-
 }
+
 
 //Lancement seconde page Modale (Ajout Photo)
 btnAddImg.addEventListener('click', () => {
@@ -294,9 +285,10 @@ btnAddImg.addEventListener('click', () => {
 	})
 	// Fermeture modale et remise à zéro
 	crossModaleImg.addEventListener('click', closeModal);
-
 	initCategoryField()
 })
+
+
 //Initialisation des catégories du formulaire dans la seconde modale (select)
 function initCategoryField() {
 	const fragment = document.createDocumentFragment()
@@ -310,6 +302,7 @@ function initCategoryField() {
 	categoryField.innerHTML = ''
 	categoryField.appendChild(fragment)
 }
+
 //Requête (post) d'envoie des nouveaux projets
 async function sendAddWork() {
 	let formData = new FormData(formAddWork)
@@ -321,11 +314,9 @@ async function sendAddWork() {
 		},
 		body: formData
 	});
-
 	console.log(response)
 	//Si la réponse est correcte, on affiche le nouveau projet dans les galeries et on vide le formulaire de la modale
 	if (response.ok) {
-
 		const work = response.json()
 		allWorks.add(await work)
 		displayWorks()
@@ -356,6 +347,7 @@ btnAddWork.addEventListener('click', function () {
 		alert('Une donnée du formulaire est vide.');
 	}
 })
+
 //récupération et vérificaion du contenu du formulaire
 const formAddWork = document.querySelector('#addWorkForm')
 const inputFile = document.querySelector('#image')
@@ -376,13 +368,13 @@ inputFile.onchange = (event) => {
 			document.querySelector('#previewImage').src = fileEventReader.target.result;
 			document.querySelector('.addImgContainer').classList.add('hide')
 			document.querySelector('.btnSubmit').classList.add('btnColor')
-
 		};
 		fileReader.readAsDataURL(selectedFile);
 	} else {
 		document.querySelector('.addImgContainer').classList.remove('hide')
 	}
 }
+	
 
 // Bouton Import Image
 const addBtnImg = document.querySelector('.addImgBtn');
