@@ -413,12 +413,14 @@ footer nav ul {
 }
 
 .modaleBox {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background-color: white;
-	width: 700px;
-	height: 750px;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    width: 700px;
+    min-height: 78%;
+    max-height: 79%;
 }
 
 .modaleDisable {
@@ -453,15 +455,17 @@ footer nav ul {
 
 .figure-img {
 	z-index: 1;
-	overflow: auto;
-	display: grid;
-	justify-content: center;
-	align-items: center;
-	grid-template-columns: repeat(5, 80px);
-	gap: 10px;
-	width: 100%;
-	margin-bottom: 130px;
-	max-height: 500px;
+    overflow: auto;
+    display: grid;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(5, 80px);
+    gap: 10px;
+    width: 80%;
+    margin-bottom: 30px;
+	padding-bottom: 100px;
+    height: 72%;
 }
 
 .figure-img img {
@@ -478,8 +482,8 @@ footer nav ul {
 }
 .bottom-modale{
 	z-index: 2;
-	position: fixed;
-	bottom: 100px;
+	bottom: 0;
+	position: absolute;
 	display: flex;
 	flex-direction: column;
 	max-height: 135px;
@@ -674,5 +678,4 @@ input:focus {
 .btnColor  {
 	background-color: #1D6154 !important;
 }
-
 
