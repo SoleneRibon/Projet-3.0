@@ -224,7 +224,6 @@ function findWorkById(id) {
 async function deleteProject(worksId) {
 	const apiUrlWorks = "http://localhost:5678/api/works";
 	const deleteUrl = `${apiUrlWorks}/${worksId}`;
-	console.log(deleteUrl)
 
 	if (confirm) {
 		const response = await fetch(deleteUrl, {
@@ -248,7 +247,7 @@ async function deleteProject(worksId) {
 					displayWorks();
 				}
 			} else {
-				console.log('Élément introuvable')
+				console.error("Élément introuvable" , error)
 			}
 		}
 	}
@@ -314,7 +313,6 @@ async function sendAddWork() {
 		},
 		body: formData
 	});
-	console.log(response)
 	//Si la réponse est correcte, on affiche le nouveau projet dans les galeries et on vide le formulaire de la modale
 	if (response.ok) {
 		const work = response.json()
@@ -340,7 +338,6 @@ async function sendAddWork() {
 const btnAddWork = document.querySelector('.btnSubmit')
 
 btnAddWork.addEventListener('click', function () {
-	console.log(addWorkFormIsValid())
 	if (addWorkFormIsValid()) {
 		sendAddWork()
 	} else {

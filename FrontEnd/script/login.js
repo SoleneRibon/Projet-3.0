@@ -18,10 +18,10 @@ async function checkLogin() {
     const result = await response.json();
     // messages d'erreurs si on ne trouve pas dans l'API.
     if (result.message === "user not found") {
-        alert("L'utilisateur n'existe pas !");
+        alert("Le mot de passe et/ou l'E-mail sont inccorects");
         return;
     } else if (result.error) {
-        alert("Mot de passe incorrect !");
+        alert("Le mot de passe et/ou l'E-mail sont inccorects");
         return;
     //récupération du token.
     } else if (result.token) {
