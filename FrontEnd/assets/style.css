@@ -335,7 +335,9 @@ footer nav ul {
 }
 
 /*************connected************************/
-
+.LogoutBtn {
+	cursor: pointer;
+}
 .top-info {
 	display: flex;
 	justify-content: center;

@@ -64,6 +64,14 @@ h2 {
 
 }
 
+li:hover {
+	color: #B1663C;
+}
+
+li a:hover {
+	color: #B1663C;
+}
+
 
 
 .log-in {

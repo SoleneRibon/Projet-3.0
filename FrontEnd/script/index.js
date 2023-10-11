@@ -114,7 +114,7 @@ if (isLogged) {
 	logIn.innerText = "logout";
 	// Ajout d'un id au bouton pour le manipuler
 	logIn.id = "logoutBtn";
-
+	logIn.classList.add('LogoutBtn');
 	const logOutbtn = document.getElementById("logoutBtn");
 	// Fonction qui permet d'écouter au click, de remove le token et de clear la session
 	logOutbtn.addEventListener("click", () => {
